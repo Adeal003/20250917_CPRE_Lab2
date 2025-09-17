@@ -11,7 +11,7 @@
 
 namespace ML {
 // --- Begin Student Code ---
-
+//ASDF
 // Compute the convolution for the layer data
 void ConvolutionalLayer::computeNaive(const LayerData& dataIn) const {
     // Get dimensions from layer parameters
