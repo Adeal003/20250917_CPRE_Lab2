@@ -14,19 +14,28 @@ namespace ML
 
     void DenseLayer::computeNaive(const LayerData &dataIn) const
     {
-        const auto &inputDims = getInputParams().dims;   // Expected: [batch, input_features] or flattened
-        const auto &outputDims = getOutputParams().dims; // Expected: [batch, output_features]
+        const auto &inputDims = getInputParams().dims;   // Can be [H, W, C] or [features] 
+        const auto &outputDims = getOutputParams().dims; // Expected: [output_features]
         const auto &weightDims = getWeightParams().dims; // Expected: [input_features, output_features]
 
-        // For Dense layers, we typically work with flattened input
-        size_t inputSize = inputDims.size() > 1 ? inputDims[inputDims.size()-1] : inputDims[0];
-        size_t outputSize = outputDims.size() > 1 ? outputDims[outputDims.size()-1] : outputDims[0];
-        
-        // Get total number of input features (flattened)
+        // Calculate total input features by flattening all input dimensions
         size_t totalInputFeatures = getInputParams().flat_count();
-        if (inputDims.size() > 1) {
-            // If we have batch dimension, divide by batch size
-            totalInputFeatures = inputDims[inputDims.size()-1];
+        size_t outputSize = getOutputParams().flat_count();
+
+        // Validate dimensions
+        size_t expectedInputFeatures = weightDims[0];  // First dimension of weight matrix
+        size_t expectedOutputFeatures = weightDims[1]; // Second dimension of weight matrix
+        
+        if (totalInputFeatures != expectedInputFeatures) {
+            std::cerr << "Dense layer input size mismatch: got " << totalInputFeatures 
+                      << ", expected " << expectedInputFeatures << std::endl;
+            return;
+        }
+        
+        if (outputSize != expectedOutputFeatures) {
+            std::cerr << "Dense layer output size mismatch: got " << outputSize 
+                      << ", expected " << expectedOutputFeatures << std::endl;
+            return;
         }
 
         const LayerData& weights = getWeightData();
@@ -34,6 +43,7 @@ namespace ML
         const LayerData& bias = getBiasData();
 
         // Dense layer computation: output = input * weights + bias
+        // Input is treated as flattened regardless of original dimensions
         for (size_t out_idx = 0; out_idx < outputSize; out_idx++)
         {
             fp32 sum = bias.get<fp32>(out_idx);

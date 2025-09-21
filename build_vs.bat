@@ -35,6 +35,7 @@ cl /std:c++14 /EHsc /O2 /nologo ^
     src\layers\Layer.cpp ^
     src\layers\Convolutional.cpp ^
     src\layers\Dense.cpp ^
+    src\layers\Flatten.cpp ^
     src\layers\MaxPooling.cpp ^
     src\layers\Softmax.cpp ^
     /Fe:build\ml.exe
