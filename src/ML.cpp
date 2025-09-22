@@ -319,8 +319,8 @@ void runInferenceTest(const Model& model, const Path& basePath) {
 void runAllLayerTests(const Model& model, const Path& basePath) {
     logInfo("--- Running All Layer Tests ---");
     
-    // Test just a few key layers to see the verification results
-    for (std::size_t layerNum = 0; layerNum <= 2; ++layerNum) {
+    // Test all layers to see complete verification results
+    for (std::size_t layerNum = 0; layerNum <= 11; ++layerNum) {
         runLayerTest(layerNum, model, basePath);
     }
 }
