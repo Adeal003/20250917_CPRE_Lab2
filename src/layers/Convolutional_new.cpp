@@ -19,7 +19,6 @@ void ConvolutionalLayer::computeNaive(const LayerData& dataIn) const {
     const auto& outputDims = getOutputParams().dims; // [H_out, W_out, C_out]
     const auto& weightDims = getWeightParams().dims; // [K_H, K_W, C_in, C_out]
     
-    size_t inputHeight = inputDims[0];
     size_t inputWidth = inputDims[1];
     size_t inputChannels = inputDims[2];
     

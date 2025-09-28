@@ -191,6 +191,7 @@ class Path : public std::string {
     public:
     inline Path(const std::string&& str): std::string(str) {}
     inline Path(const char* str): std::string(str) {}
+  
 
     inline Path operator/(const std::string&& other) const {
         return Path(*this + "/" + other);
