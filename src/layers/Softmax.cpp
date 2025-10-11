@@ -15,8 +15,8 @@ namespace ML
 
     void SoftmaxLayer::computeNaive(const LayerData &dataIn) const
     {
-        const auto &inputDims = getInputParams().dims;   // Expected: [batch, features] or just [features]
-        const auto &outputDims = getOutputParams().dims; // Expected: same as input
+        //const auto &inputDims = getInputParams().dims;   // Expected: [batch, features] or just [features]
+        //const auto &outputDims = getOutputParams().dims; // Expected: same as input
 
         // Get the number of elements to process
         size_t numElements = getInputParams().flat_count();

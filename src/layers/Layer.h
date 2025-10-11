@@ -78,12 +78,12 @@ class LayerData {
 
     // Get the data pointer and cast it
     template <typename T> T& get(unsigned int flat_index) {
-        // boundsCheck<T>(flat_index);
+        boundsCheck<T>(flat_index);
         return ((T*)data.get())[flat_index];
     }
 
     template <typename T> T get(unsigned int flat_index) const {
-        // boundsCheck<T>(flat_index);
+        boundsCheck<T>(flat_index);
         return ((T*)data.get())[flat_index];
     }
 

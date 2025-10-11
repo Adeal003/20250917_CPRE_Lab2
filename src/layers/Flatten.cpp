@@ -12,8 +12,8 @@ namespace ML
 
     void FlattenLayer::computeNaive(const LayerData &dataIn) const
     {
-        const auto &inputDims = getInputParams().dims;
-        const auto &outputDims = getOutputParams().dims;
+        //const auto &inputDims = getInputParams().dims;
+        //const auto &outputDims = getOutputParams().dims;
 
         // Validate that input and output have the same total number of elements
         size_t inputElements = getInputParams().flat_count();

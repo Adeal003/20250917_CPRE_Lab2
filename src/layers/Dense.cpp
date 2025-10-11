@@ -14,8 +14,8 @@ namespace ML
 
     void DenseLayer::computeNaive(const LayerData &dataIn) const
     {
-        const auto &inputDims = getInputParams().dims;   // Can be [H, W, C] or [features] 
-        const auto &outputDims = getOutputParams().dims; // Expected: [output_features]
+        //const auto &inputDims = getInputParams().dims;   // Can be [H, W, C] or [features] 
+        //const auto &outputDims = getOutputParams().dims; // Expected: [output_features]
         const auto &weightDims = getWeightParams().dims; // Expected: [input_features, output_features]
 
         // Calculate total input features by flattening all input dimensions
@@ -56,6 +56,16 @@ namespace ML
                 sum += dataIn.get<fp32>(in_idx) * weights.get<fp32>(weightIdx);
             }
 
+            // Apply ReLU activation only for hidden layers (not the final layer before Softmax)
+            // The final dense layer typically has 200 outputs (for classification)
+            // Hidden dense layers have other sizes (like 256)
+            if (outputSize != 200) {
+                // This is a hidden layer, apply ReLU
+                sum = std::max(0.0f, sum);
+            }
+            // For the final layer (outputSize == 200), don't apply ReLU
+
+            // Store result in output
             output.get<fp32>(out_idx) = sum;
         }
     }
