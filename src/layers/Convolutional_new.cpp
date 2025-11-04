@@ -12,7 +12,7 @@
 namespace ML
 {
     // --- Begin Student Code ---
-    // ASDFff
+    // ASDFf
     // Compute the convolution for the layer data
     // Get dimensions from layer parameters
   
